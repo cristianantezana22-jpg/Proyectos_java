@@ -21,8 +21,8 @@ public class CancionController {
         return ResponseEntity.ok(cancion);
     }
 
-    @GetMapping
-    public ResponseEntity<List<CancionDto>> listarCanciones(){
-        return ResponseEntity.ok(cancionService.listar());
+    @GetMapping("/{genero}")
+    public ResponseEntity<List<CancionDto>> listarCanciones(@PathVariable String genero){
+        return ResponseEntity.ok(cancionService.listar(genero));
     }
 }

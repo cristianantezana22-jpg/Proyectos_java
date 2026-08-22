@@ -28,8 +28,8 @@ public class CancionServiceImpl implements CancionService {
     }
 
     @Override
-    public List<CancionDto> listar(){
-        return cancionRepository.findAll()
+    public List<CancionDto> listar(String genero){
+        return cancionRepository.findByGenero(genero)
                 .stream()
                 .map(c -> new CancionDto(c.getId(), c.getNombre(), c.getGenero()))
                 .collect(Collectors.toList());

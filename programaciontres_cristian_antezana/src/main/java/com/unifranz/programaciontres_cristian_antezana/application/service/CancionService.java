@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface CancionService {
     CancionDto guardar(CancionDto CancionDto);
-    List<CancionDto> listar();
+    List<CancionDto> listar(String genero);
 
 }
