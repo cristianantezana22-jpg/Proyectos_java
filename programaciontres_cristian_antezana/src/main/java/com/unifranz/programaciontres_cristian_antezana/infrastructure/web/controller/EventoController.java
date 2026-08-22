@@ -18,8 +18,8 @@ public class EventoController {
     private EventoService eventoService;
     @PostMapping("/MostrarCambio")
     public Map<String, Object> MostrarCambio (@RequestBody JsonNode entrada) {
-        int dinero = entrada.get("dinero").asInt();
-        int cambio = entrada.get("cambio").asInt();
+        double dinero = entrada.get("dinero").asDouble();
+        double cambio = entrada.get("cambio").asDouble();
         return eventoService.MostrarCambio(dinero, cambio);
     }
 }
