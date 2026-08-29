@@ -4,7 +4,7 @@ import com.unifranz.programaciontres_cristian_antezana.application.dto.UsuarioDt
 import java.util.List;
 
 public interface UsuarioService {
-    UsuarioDto guardar(UsuarioDto usuarioDto);
+    UsuarioDto guardar (UsuarioDto usuarioDto);
     List<UsuarioDto> listar();
-
+    List<UsuarioDto> listarActivos();
 }

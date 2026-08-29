@@ -2,9 +2,9 @@ package com.unifranz.programaciontres_cristian_antezana.infrastructure.web.contr
 
 import com.unifranz.programaciontres_cristian_antezana.application.dto.UsuarioDto;
 import com.unifranz.programaciontres_cristian_antezana.application.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -24,5 +24,10 @@ public class UsuarioController {
     @GetMapping
     public ResponseEntity<List<UsuarioDto>> listarUsuarios(){
         return ResponseEntity.ok(usuarioService.listar());
+    }
+
+    @GetMapping("/listarUsuarios")
+    public ResponseEntity<List<UsuarioDto>> listarUsuariosActivos(){
+        return ResponseEntity.ok(usuarioService.listarActivos());
     }
 }
