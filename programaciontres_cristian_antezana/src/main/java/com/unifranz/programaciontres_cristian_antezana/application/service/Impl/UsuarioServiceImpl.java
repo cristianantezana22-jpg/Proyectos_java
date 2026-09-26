@@ -31,6 +31,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setNombre(usuarioDto.getNombre());
         usuario.setEmail(usuarioDto.getEmail());
         usuario.setFlagAdmin(usuarioDto.getFlagAdmin());
+        usuario.setEliminado(false);
 
         Usuario guardar = usuarioRepository.save(usuario);
 
@@ -48,5 +49,35 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public List<UsuarioDto> listarActivos(){
         return usuarioRepository.listarActivos();
+    }
+
+    @Override
+        public UsuarioDto editar(Long id, UsuarioDto usuarioDto) {
+            Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
+
+        // Si eliminado es null o true
+        if (Boolean.TRUE.equals(usuario.getEliminado())) {
+            throw new IllegalStateException("No se puede editar un usuario eliminado.");
+        }
+
+        usuario.setNombre(usuarioDto.getNombre());
+        usuario.setEmail(usuarioDto.getEmail());
+        if (usuarioDto.getFlagAdmin() != null) {
+            usuario.setFlagAdmin(usuarioDto.getFlagAdmin());
+        }
+
+        Usuario usuarioActualizado = usuarioRepository.save(usuario);
+        return new UsuarioDto(usuarioActualizado);
+    }
+
+    @Override
+    public void eliminarLogico(Long id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
+
+        // Marcar como eliminado en lugar de usar usuarioRepository.delete(usuario)
+        usuario.setEliminado(true);
+        usuarioRepository.save(usuario);
     }
 }

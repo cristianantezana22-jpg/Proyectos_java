@@ -24,5 +24,6 @@ public class Usuario extends Auditable{
     private String nombre;
     private String email;
     private String rol = "NORMAL";
+    private Boolean eliminado = false;
     private Boolean flagAdmin;
 }
